@@ -1,0 +1,159 @@
+.cut-corner{
+    padding: 1em;
+    clip-path: polygon(
+    calc(100% - var(--corner-size)) 0,
+    100% var(--corner-size),
+    100% 100%, 0 100%, 0 0
+    );
+}
+
+#a{
+    background: hotpink;
+    --corner-size: 20px
+}
+
+#b{
+    background: skyblue;
+    --corner-size: 10px;
+}
+/*------------------------------------------------------*/
+:root{
+    --primary-color: hsl(250 30% 40%);
+    --secundary-color: hsl(190 40% 40%);
+    --tinted-background: hsl(0 0% 100% / .8);
+    --canvas: white;
+    --canvastext: white;
+    background: hsl(200, 15%, 20%);
+}
+@media (prefers-color-scheme: dark){
+    :root{
+        --primary-color: hsl(250 30% 60%);
+        --secundary-color: hsl(190 40% 60%);
+        --tinted-background: hsl(0 0% 0% / .5);
+        --canvas: white;
+        --canvastext: white;
+    }
+}
+h1{
+    color: var(--secundary-color);
+}
+article{
+    --colors:var(--primary-color);
+    --link-color: var(--secundary-color);
+    background: var(--colors);
+}
+article h2{
+    color: var(--canvas);
+    background: var(--colors);
+}
+article a{
+    color: var(--link-color);
+}
+article .content{
+    background: var(--tinted-background);
+}
+article.alt{
+    --colors: var(--secundary-color);
+    --link-color:var(--primary-color);
+}
+/*@property, CSS.registerProperty(), page example shoelace.style/image compare*/
+/*progress bar*/
+progress{
+    -webkit-appearance: none;
+    background: hsl(220 10% 88%);
+    --bar-color: hsl(30 90% 30%);
+}
+progress::-webkit-progress-value{
+    background: var(--bar-color);
+}
+progress::-moz-progress-bar{
+    background: var(--bar-color);
+}
+/*Galley photos*/
+.fancy-photos{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap:3vw;
+}
+/*@property --scale{
+    syntax: "number";
+    inherits: false;
+    initial-value:1;
+}*/
+/*@supports*/
+.fancy-photos img{
+    --scale: 1;
+    --rotate: 0deg;
+    width:100%;
+    box-sizing: border-box;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    transform: scale(var(--scale))
+                rotate(var(--rotate));
+    transition: .3s;
+}
+.fancy-photos img:hover{
+    background: yellow;
+}
+.fancy-photos img:nth-child(odd){
+    --rotate: 4deg;
+}
+.fancy-photos img:nth-child(3n +1){
+    --rotate: 3deg;
+}
+.fancy-photos img:hover{
+    --scale: 1.2;
+}
+/*Buttons*/
+/*@property --color{
+    syntax:"<color>";
+    inherits:true;
+    initial-value:black;
+}*/
+button{
+    --_color:var(--color, black);
+    border: .1em solid var(--_color);
+    background: transparent;
+    color: var(--_color);
+    transition: 1s;
+}
+button:hover{
+    box-shadow: 0 0 0 2em var(--_color) inset;
+    color: white;
+}
+
+button.pink{
+    border-color: #f06;
+    --color:#f06;
+}
+
+/*Bar char components*/
+.bar-chart{
+    display: flex;
+    align-items: flex-end;
+    gap: var(--bar-spacing, 1.5em);
+    padding: 0 1.53em;
+    font-size: 60%;
+    background: linear-gradient(to bottom, hsl(0, 0%, 100%,.1) 50%, transparent 0) top / 100% calc(100% /(var(--band-coutn,10) / 2));
+    border: 2px solid white;
+    border-top: 0;
+    border-right: 0;
+    width: fit-content;
+    height: calc(100vmin -12em);
+    margin: 2em auto;
+}
+.bar-chart > div{
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: var(--bar-width, 2em);
+    height: var(--p);
+    background: var(--bar-color, deeppink);
+    box-sizing: border-box;
+    padding: .3em 0;
+    font-weight: bold;
+    letter-spacing: -.04em;
+    word-wrap: break-word;
+    line-height: 1;
+    color: white;
+}
